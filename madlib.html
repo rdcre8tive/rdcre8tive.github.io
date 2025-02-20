@@ -325,29 +325,7 @@ top: 0;
     <div id="window3" class="window"></div>
   </div>
   <div class="container">
-    <div class="column">
-    <h2 class=".headline"><b>Step 1</b></h2>
-        <h1>Define<br></h1>
-      <p>Consider a problem, challenge or issue that you would like to address.</p>
-    </div>
-    <div class="divider"></div>
-    <div class="column">
-   <h2 class=".headline"><b>Step 2</b></h2>
-        <h1>Innovate<br></h1>
-      <p>Click on the Innovate button to generate a MadLib template.</p>
-    </div>
-    <div class="divider"></div>
-    <div class="column">
-   <h2 class=".headline"><b>Step 3</b></h2>
-        <h1>Connect<br></h1>
-      <p>Fill in the gaps in the template using the provided random set of frames.</p>
-    </div>
-    <div class="divider"></div>
-    <div class="column">
-   <h2 class=".headline"><b>Step 4</b></h2>
-        <h1>Explore<br></h1>
-      <p>Discover additional frame solutions and explore alternative perspectives.</p>
-    </div>
+
   </div>
 
 
@@ -1118,12 +1096,22 @@ document.getElementById('spin-button').addEventListener('click', () => {
     // Modify the example link click handler
     example.addEventListener("click", function(e) {
       e.preventDefault();
-      showAllFrames();
-      // Hide the link after clicking
-      example.style.display = "none";
+      // Only show frames if output is visible
+      if (output.style.display === "block") {
+        showAllFrames();
+        // Hide the link after clicking
+        example.style.display = "none";
+      }
     });
 
-    spinButton.addEventListener("click", spin);
+    // Hide example link by default
+    example.style.display = "none";
+
+    spinButton.addEventListener("click", function() {
+      spin();
+      // Show the example link after spinning
+      example.style.display = "block";
+    });
   });
 
 
