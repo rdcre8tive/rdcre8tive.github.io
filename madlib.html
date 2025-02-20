@@ -1,4 +1,3 @@
-
 <html>
 
 <head>
@@ -42,27 +41,24 @@
       font-family: optimist, arial;
       width: 80%;
       line-height: 2em;
-           margin: 0 10% 10% 10%;
+      margin: 0 10% 10% 10%;
       text-align: center;
       font-weight: 200;
-        background-image: url("texture.jpeg");
-  background-repeat: repeat;
-  background-color: white;
-       
+      background-image: url("madlib-assets/texture.jpeg");
+      background-repeat: repeat;
+      background-color: white;
     }
 
-    h2#overview {
-    font-weight: 400;
-}
+    .logo {
+      width: 100%;
+      max-width: 600px;
+      transition: all 0.5s ease;
+      margin: 20px auto;
+    }
 
-    #variable1,
-    #variable2,
-    #variable3,
-    #variable4 {
-     
-      font-weight: 800 !important;
-      text-transform: uppercase;
-  filter: drop-shadow(1px 1px 2px #c0c0c0);
+    .logo.small {
+      max-width: 300px;
+      margin: 10px auto;
     }
 
     #windows-container {
@@ -70,7 +66,13 @@
       justify-content: center;
       width: 90%;
       padding: 0 5% 0 5%;
-    } 
+      transition: all 0.5s ease;
+      margin-top: 40px;
+    }
+
+    #windows-container.moved-up {
+      margin-top: -10px;
+    }
 
     .window {
       margin: 0 3px;
@@ -233,15 +235,17 @@ top: 0;
 <body>
 
   <div class="left_sparkle">
-    <img src="left_sparkle.gif" alt="" />
+    <img src="madlib-assets/left_sparkle.gif" alt="" />
   </div>
   
 
   <div class="right_sparkle">
-    <img src="right_sparkle.gif" alt="" />
+    <img src="madlib-assets/right_sparkle.gif" alt="" />
   </div>
   
-  <img src="madlib-logo.png" alt="" />
+  <div class="logo">
+    <img src="madlib-assets/madlib-logo.png" alt="" />
+  </div>
   
  
   
@@ -256,8 +260,6 @@ top: 0;
     <div id="window2" class="window"></div>
     <div id="window3" class="window"></div>
   </div>
-
-
   <div class="container">
     <div class="column">
     <h2 class=".headline"><b>Step 1</b></h2>
@@ -287,7 +289,7 @@ top: 0;
 
 
 
-  <h2>Think of your problem to solve then...
+  <h2 id="prompt-text">Think of your problem to solve then...</h2>
     <button class="css-button-gradient--4" id="spin-button"  href="https://bit.ly/MadlibButton" >Innovate!</button>
     <div id="output">
       To invent a solution to solve my problem for_________.
@@ -316,7 +318,7 @@ top: 0;
     <p><br><br><a id="example" href="#" >See all the Frames and View an Example Madlib and Template!</a></p>
 
     
-    <audio id="spin-sound" src="spinsound.mp3"></audio>
+    <audio id="spin-sound" src="madlib-assets/spinsound.mp3"></audio>
    
 
 </body>
@@ -328,43 +330,43 @@ top: 0;
     {
       "title": "Architect",
       "description": "The Architect frame set embodies the art of design, spatial awareness, and the creation of functional, aesthetically pleasing structures. Architects approach problem-solving by considering the relationships between elements, analyzing the environment, and visualizing the end result. This perspective emphasizes the importance of balance, harmony, and purpose in finding solutions that are both practical and innovative. When approaching invention, an Architect would rely on their keen sense of design and spatial intelligence to envision and create groundbreaking concepts that combine form and function, resulting in unique, efficient, and visually appealing solutions. Notable historical figures: Frank Lloyd Wright, Zaha Hadid, Le Corbusier, Mies van der Rohe, and Antoni Gaudí.",
-      "src": "architect.svg",
+      "src": "madlib-assets/architect.svg",
       "color": "#ffff00ff"
     },
     {
       "title": "Physicist",
       "description": "The Scientist frame set promotes methodical problem-solving using research, data analysis, and empirical evidence. Scientists examine issues in detail, gather relevant data, and identify patterns to determine root causes. This perspective ensures thorough, evidence-based solutions. When approaching invention, a Scientist would utilize a data-driven, evidence-based approach to generate innovative solutions by identifying patterns, conducting experiments, and refining ideas through rigorous testing. Notable historical figures: Albert Einstein, Marie Curie, Charles Darwin, Isaac Newton, and Rosalind Franklin.",
-      "src": "physicist.svg",
+      "src": "madlib-assets/physicist.svg",
       "color": "#00ff00ff"
     },
     {
       "title": "Creative",
       "description": "The Creative frame set celebrates the power of imagination, originality, and artistic expression. Creatives approach problem-solving by thinking outside the box, exploring unconventional ideas, and embracing diverse perspectives. This mindset fosters innovation by encouraging experimentation, risk-taking, and the pursuit of novel solutions. When approaching invention, a Creative would tap into their boundless imagination and artistic instincts to generate unique, visually captivating, and emotionally engaging concepts that push the boundaries of what's possible. Notable historical figures: Leonardo da Vinci, Frida Kahlo, Pablo Picasso, Vincent van Gogh, and Georgia O'Keeffe.",
-      "src": "creative.svg",
+      "src": "madlib-assets/creative.svg",
       "color": "#ff9900ff"
     },
     {
       "title": "Engineer",
       "description": "The Engineer frame set emphasizes the application of scientific principles, mathematics, and technical skills to design, build, and maintain complex systems and structures. Engineers approach problem-solving by breaking down challenges into manageable components, seeking efficient solutions, and optimizing performance. This mindset values practicality, functionality, and reliability in the pursuit of innovation. When approaching invention, an Engineer would draw upon their strong analytical skills and technical expertise to devise inventive solutions that are not only groundbreaking but also feasible, efficient, and durable. Notable  Historical Figures: Nikola Tesla, Thomas Edison, Ada Lovelace, James Watt, and Hedy Lamarr.",
-      "src": "engineer.svg",
+      "src": "madlib-assets/engineer.svg",
       "color": "#7c7cffff"
     },
     {
       "title": "Mathematician",
       "description": "The Mathematician frame set encourages structured problem-solving through logical reasoning, abstract thinking, and the exploration of mathematical concepts. Mathematicians tackle complex challenges by breaking them down into smaller components, collecting and analyzing data, and utilizing patterns and relationships to identify underlying principles. This perspective guarantees precise, evidence-based solutions. When approaching invention, a Mathematician would apply a theory-driven, systematic approach to devise innovative solutions by discerning relationships, constructing mathematical models, and refining ideas through rigorous proof and validation. Notable Historical Figures: Isaac Newton, Ada Lovelace, Euclid, Alan Turing, and Emmy Noether.",
-      "src": "mathematician.svg",
+      "src": "madlib-assets/mathematician.svg",
       "color": "#ff00ffff"
     },
     {
       "title": "Attorney",
       "description": "The Attorney frame set emphasizes strategic problem-solving through critical thinking, interpretation of laws and regulations, and persuasive communication. Attorney address complex issues by scrutinizing the details, considering legal precedents, and evaluating potential outcomes based on the applicable rules and regulations. This approach ensures well-founded, legally compliant solutions. When approaching invention, a Attorney would employ a context-driven, analytical methodology to develop innovative solutions by identifying legal implications, assessing risks and opportunities, and refining ideas through thorough examination and negotiation. Notable Historical Figures: Abraham Lincoln, Ruth Bader Ginsburg, Thurgood Marshall, Mahatma Gandhi, and Nelson Mandela.",
-      "src": "attorney.svg",
+      "src": "madlib-assets/attorney.svg",
       "color": "#ffa492ff"
     },
     {
       "title": "Investigator",
       "description": "The Investigator frame set highlights systematic problem-solving through keen observation, meticulous examination, and objective analysis. Investigators tackle complex issues by gathering and evaluating evidence, scrutinizing minute details, and drawing connections to reveal the truth. This perspective ensures accurate, fact-based solutions. When approaching invention, an Investigator would employ an evidence-driven, detail-oriented approach to conceive innovative solutions by identifying patterns, conducting thorough inquiries, and refining ideas through persistent verification and validation. Notable Historical Figures: Sherlock Holmes (fictional character), Allan Pinkerton, Eliot Ness, Agatha Christie, and J. Edgar Hoover.",
-      "src": "investigator.svg",
+      "src": "madlib-assets/investigator.svg",
       "color": "#ff0000ff"
     }
   ],
@@ -372,211 +374,211 @@ top: 0;
     {
       "title": "Variable Rewards",
       "description": "Variable Rewards involve the use of unpredictable, random rewards as powerful motivators, leveraging their perceived scarcity and potential to avoid conflicts with intrinsic motivation. To harness variable rewards for inventiveness and increase patent potential, design your product or service to include random rewards that encourage positive behaviors or user engagement. These rewards can take the form of praise, virtual goods, redeemable points, or other incentives without a predictable pattern. By incorporating variable rewards, you can foster innovation and enhance the likelihood of developing patentable ideas. Keywords of Related Topics: Shaping, Sequencing, Delighters, Gifting, Periodic Events.",
-      "src": "variable_rewards.svg",
+      "src": "madlib-assets/variable_rewards.svg",
       "color": "#ffa492ff"
     },
     {
       "title": "Delighters",
       "description": "Delighters are small, unexpected, and playful pleasures that capture attention and create memorable experiences. To leverage delighters for inventiveness and increase patent potential, design your product or service to incorporate surprising and delightful elements. These can include engaging microcopy, amusing videos, compliments, hidden Easter eggs, or satisfying challenges that allow users to discover connections or solve mental puzzles. By integrating delighters, you can foster innovation and enhance the likelihood of developing patentable ideas. Keywords of Related Topics: Surprise, Pattern Recognition, Humor Effect, Gifting, Appropriate Challenges.",
-      "src": "delighters.svg",
+      "src": "madlib-assets/delighters.svg",
       "color": "#ff0000ff"
     },
     {
       "title": "Competition",
       "description": "Competition refers to the natural drive to attain things that cannot be shared when individuals or groups share the same environment. To harness competition for inventiveness and increase patent potential, design your product or service to include competitive elements that incentivize self-improvement and user engagement. Competition can take the form of individual or group challenges, but be cautious about recognizing one person at the expense of the group. By incorporating competition, you can foster innovation and enhance the likelihood of developing patentable ideas. Keywords of Related Topics: Status, Reputation, Ownership Bias, Loss Aversion, Feedback Loops, Shaping, Social Proof.",
-      "src": "competition.svg",
+      "src": "madlib-assets/competition.svg",
       "color": "#00ffffff"
     },
     {
       "title": "Collecting",
       "description": "Collecting refers to the natural inclination to amass units that add to or complete a set when there is interest. To leverage collecting for inventiveness and increase patent potential, design your product or service to include opportunities for users to collect items. These items can range from coupons and badges to pieces of a larger whole, ideally linking to users' reputations and reinforcing the content of your service. In business applications, consider performance-based collectibles that correlate with desirable metrics like speed, frequency, or effectiveness. By incorporating collecting, you can foster innovation and enhance the likelihood of developing patentable ideas. Keywords of Related Topics: Chunking, Set Completion, Achievements, Autonomy, Variable Rewards, Scarcity, Self-Expression.",
-      "src": "collecting.svg",
+      "src": "madlib-assets/collecting.svg",
       "color": "#00ff00ff"
     },
     {
       "title": "Set Completion",
       "description": "Set Completion is the psychological principle that the closer a collection is to being complete, the more we desire to collect all pieces. To harness set completion for inventiveness and increase patent potential, design your product or service to enable users to collect items that can be organized into discrete sets. This provides easily achievable goals and motivation to continue completing the larger collection. Look for logical groupings that suggest sets and set completion, and consider applying this principle to incomplete puzzles or pictures to drive user engagement. By incorporating set completion, you can foster innovation and enhance the likelihood of developing patentable ideas. Keywords of Related Topics: Curiosity, Collecting, Chunking, Achievements, Pattern Recognition, Status, Reputation, Gifting, Variable Rewards.",
-      "src": "set_completion.svg",
+      "src": "madlib-assets/set_completion.svg",
       "color": "#ffff00ff"
     },
     {
       "title": "Positive Mimicry",
       "description": "Positive Mimicry is the process of learning by modeling our behavior after others, particularly in the context of observing positive actions. To harness positive mimicry for inventiveness and increase patent potential, design your product or service to showcase examples of normal or intended behavior. In social contexts, identify and reward users who model good behavior. Provide examples of positive interactions to encourage desirable conduct. By incorporating positive mimicry, you can foster innovation and enhance the likelihood of developing patentable ideas. Keywords of Related Topics: Reputation, Social Proof, Feedback Loops, Status, Shaping.",
-      "src": "positive_mimicry.svg",
+      "src": "madlib-assets/positive_mimicry.svg",
       "color": "#ff9900ff"
     },
     {
       "title": "Gifting",
       "description": "Gifting is the concept that when we receive a gift, we feel the need to reciprocate in some way. To leverage gifting for inventiveness and increase patent potential, design your product or service to include unexpected gifts for users. These gifts can range from free accounts or upgrades to personalized reports or gift cards. Ensure that the gifts are unique and not merely expected features already provided by similar services. By incorporating gifting, you can foster innovation and enhance the likelihood of developing patentable ideas. Keywords of Related Topics: Delighters, Variable Rewards, Shaping, Sequencing, Triggers.",
-      "src": "gifting.svg",
+      "src": "madlib-assets/gifting.svg",
       "color": "#7c7cffff"
     },
     {
       "title": "Appropriate Challenges",
       "description": "Appropriate Challenges are tasks that strike a balance between overwhelming and boring, delighting us as we engage with them. To leverage appropriate challenges for inventiveness and increase patent potential, design your product or service to include tasks that challenge users without overwhelming them. These challenges can be embedded within the system or reflect users' personal best or average performance. They can be carefully constructed through game design or merely suggest intriguing, unsolved problems. By incorporating appropriate challenges, you can foster innovation and enhance the likelihood of developing patentable ideas. Keywords of Related Topics: Curiosity, Status, Surprise, Set Completion, Competition, Reputation, Feedback Loops.",
-      "src": "appropriate_challenges.svg",
+      "src": "madlib-assets/appropriate_challenges.svg",
       "color": "#9900ffff"
     },
     {
       "title": "Achievements",
       "description": "Achievements refer to the recognition of meaningful accomplishments, which can increase engagement in various activities. To leverage achievements for inventiveness and increase patent potential, design your product or service to recognize and reward users for accomplishing personal or social goals tied to desired behaviors. In gaming environments, achievements can be acknowledged through points, badges, or levels, while in other contexts, they can be signaled by promotions, memberships, privileges, or acquisitions. By incorporating achievements, you can foster innovation and enhance the likelihood of developing patentable ideas. Keywords of Related Topics: Appropriate Challenges, Feedback Loops, Competition, Reputation, Status, Story.",
-      "src": "achievements.svg",
+      "src": "madlib-assets/achievements.svg",
       "color": "#ff00ffff"
     },
     {
       "title": "Curiosity",
       "description": "Curiosity is the desire to learn more when presented with a small amount of interesting information. To leverage curiosity for inventiveness and increase patent potential, design your product or service to reveal just enough information to pique interest, enticing users to take the next step. Additionally, you can arouse interest by incorporating unusual or unexpected elements, encouraging users to explore further. Puzzles can also serve as intriguing components. By incorporating curiosity, you can foster innovation and enhance the likelihood of developing patentable ideas. Keywords of Related Topics: Pattern Recognition, Gifting, Appropriate Challenges.",
-      "src": "curiosity.svg",
+      "src": "madlib-assets/curiosity.svg",
       "color": "#ffa492ff"
     },
     {
       "title": "Anchoring & Adjustment",
       "description": "Anchoring & Adjustment refers to the tendency to rely heavily on one trait or piece of information when making decisions, especially in unfamiliar situations. To leverage anchoring and adjustment for inventiveness and increase patent potential, be mindful of the anchors you provide, whether intentionally or unintentionally. By considering the anchors you present to users, you can guide them towards more informed decisions and foster innovation. Thoughtfully design your product or service to incorporate relevant numeric values or attributes, ensuring users have the necessary information to make the best choices, ultimately enhancing the likelihood of developing patentable ideas. Keywords of Related Topics: Priming, Conceptual Metaphor, Framing.",
-      "src": "anchoring_adjustment.svg",
+      "src": "madlib-assets/anchoring_adjustment.svg",
       "color": "#ff0000ff"
     },
     {
       "title": "Framing",
       "description": "Framing refers to how issues and data are presented, which can influence judgment and decision-making. To leverage framing for inventiveness and increase patent potential, carefully consider how you present choices and options in your product or service. By framing information in a relatable and compelling way, you can guide users towards more desirable choices, fostering innovation. For instance, presenting donations as costing less than a cup of coffee a day helps users rationalize a monthly commitment. Thoughtful framing can enhance user engagement and improve the likelihood of developing patentable ideas. Keywords of Related Topics: Conceptual Metaphor, Story, Loss Aversion.",
-      "src": "framing.svg",
+      "src": "madlib-assets/framing.svg",
       "color": "#00ffffff"
     },
     {
       "title": "Reputation",
       "description": "Reputation plays a crucial role in shaping personal behavior, as individuals tend to be more conscious of their actions when they may impact how they are perceived by their peers or the public. To harness the power of reputation in the context of inventiveness and patent potential, connect actions to profiles or identifiable information, especially in online social settings. Encouraging good conduct through sharing information, fostering connections, and recording personal activities can promote innovation. Consider incorporating external identities that users have built to further enhance the importance of reputation in your product or service. Keywords of Related Topics: Status, Social Proof, Authority, Self-Expression, Loss Aversion, Authority, Positive Mimicry, Autonomy.",
-      "src": "reputation.svg",
+      "src": "madlib-assets/reputation.svg",
       "color": "#00ff00ff"
     },
     {
       "title": "Story-Telling",
       "description": "Stories greatly influence our decisions, as they provide a context through which we filter and comprehend information. To enhance inventiveness and patent potential, create stories that involve your users, either explicitly through simple narratives or implicitly using elements that suggest a hero, conflict, or other narrative aspects. Crafting powerful stories can give meaning to mundane tasks, ultimately motivating users to engage with your product or service more deeply. Keywords of Related Topics: Commitment & Consistency, Autonomy, Authority, Affect Heuristic, Conceptual Metaphor, Priming, Framing, Periodic Events, Task Significance, Shaping.",
-      "src": "storytelling.svg",
+      "src": "madlib-assets/storytelling.svg",
       "color": "#ffff00ff"
     },
     {
       "title": "Shaping",
       "description": "Shaping is a technique that involves starting with the simplest form of a behavior and gradually reinforcing increasingly accurate approximations of that behavior. To boost inventiveness and patent potential, apply shaping by introducing a small set of features at first and revealing more as users become proficient. Reward mastery or increased proficiency, breaking down desired behaviors into steps and reinforcing the completion of each step until mastered. Keywords of Related Topics: Sequencing, Variable Rewards.",
-      "src": "shaping.svg",
+      "src": "madlib-assets/shaping.svg",
       "color": "#ff9900ff"
     },
     {
       "title": "Surprise",
       "description": "Surprise involves capturing attention through new and unexpected discoveries within normal routines. To enhance inventiveness and patent potential, incorporate small surprises into your design, such as altering confirmation messages or images on familiar pages. Deviate from expected patterns set by other experiences to maintain user interest and engagement. Keywords of Related Topics: Chunking, Need for Certainty, Variable Rewards, Delighters, Gifting.",
-      "src": "surprise.svg",
+      "src": "madlib-assets/surprise.svg",
       "color": "#7c7cffff"
     },
     {
       "title": "Triggers",
       "description": "Triggers are small nudges placed within our regular paths that remind and motivate us to take action. To boost inventiveness and patent potential, incorporate effective triggers in your design. Consider various online and offline triggers, such as tweets, ads, links, SMS alerts, IM reminders, or printed sheets, to remind users to engage with your invention or concept. Keywords of Related Topics: Surprise, Feedback Loops, Sequencing, Shaping, Variable Rewards, Delighters, Duration Effects.",
-      "src": "triggers.svg",
+      "src": "madlib-assets/triggers.svg",
       "color": "#9900ffff"
     },
     {
       "title": "Duration Effects",
       "description": "Duration Effects refer to the subjective perception of time. To enhance inventiveness and patent potential, consider how you can create the perception of faster performance in your design. Use slower preloaders, reveal content as parts are loaded, or provide engaging distractions to keep users mentally occupied, making them less aware of the time spent waiting. Keywords of Related Topics: Humor Effect, Appropriate Challenges, Sequencing, Shaping, Affect Heuristic.",
-      "src": "duration.svg",
+      "src": "madlib-assets/duration.svg",
       "color": "#ff00ffff"
     },
     {
       "title": "Chunking",
       "description": "Chunking involves grouping information into familiar, manageable units, making it easier to understand and recall. To boost inventiveness and patent potential, break down long lists or complex tasks into smaller, manageable groups. By understanding the mental routines people develop in response to specific situations, you can identify areas for improvement in your design. Keywords of Related Topics: Proximity, Uniform Connectedness, Status Quo Bias, Shaping, Sequencing, Familiarity Bias.",
-      "src": "chunking.svg",
+      "src": "madlib-assets/chunking.svg",
       "color": "#ffa492ff"
     },
     {
       "title": "Limited Access",
       "description": "Limited access plays on our natural desire for things that are exclusive or belong to a select few. To enhance inventiveness and patent potential, consider creating areas or features on your platform that are exclusive or accessible only to certain members. This exclusivity can be based on membership, proficiency, or earned access through specific achievements. Keywords of Related Topics: Reputation, Status, Scarcity, Value Attribution, Delighters, Authority, Story.",
-      "src": "limited_access.svg",
+      "src": "madlib-assets/limited_access.svg",
       "color": "#ff0000ff"
     },
     {
       "title": "Priming",
       "description": "Priming involves the use of subtle visual or verbal suggestions to help recall specific information, which in turn influences how people respond to a certain stimulus or interaction. By carefully selecting images or words that suggest a particular concept, you can set expectations and guide what is brought into short-term memory. Additionally, evaluate the existing imagery and language on your platform to ensure that it effectively primes users for the desired outcome or associations. Keywords of Related Topics: Anchoring & Adjustment, Visual Imagery, Conceptual Metaphor, Humor Effect, Sensory Appeal.",
-      "src": "priming.svg",
+      "src": "madlib-assets/priming.svg",
       "color": "#00ffffff"
     },
     {
       "title": "Limited Duration",
       "description": "Limited duration refers to the persuasive technique of setting a time constraint for users to take action. By providing a limited time window for users to respond, it increases the likelihood that they will participate or make a decision. Though often used to encourage purchasing behaviors, this approach can be applied to shape other day-to-day behaviors as well. Implementing limited time offers, rewards, or disappearing options can create a sense of urgency that drives user engagement. Keywords of Related Topics: Periodic Events, Loss Aversion, Reputation, Status, Achievements, Feedback Loops, Scarcity, Self-Expression.",
-      "src": "limited_duration.svg",
+      "src": "madlib-assets/limited_duration.svg",
       "color": "#00ff00ff"
     },
     {
       "title": "Certainty",
       "description": "The need for certainty is a psychological concept that describes the human desire for clear, specific information and a sense of predictability. People are more likely to take action when they have concrete information available to guide their decisions. While mild uncertainty can focus attention and spark curiosity in certain contexts, excessive ambiguity can lead to anxiety and inaction. Designers can create environments that foster certainty or uncertainty depending on the desired outcome, ensuring that users have the information they need to make informed decisions. Keywords of Related Topics: Anchoring & Adjustment, Framing, Chunking, Story, Limited Choice, Sequencing, Curiosity.",
-      "src": "certainty.svg",
+      "src": "madlib-assets/certainty.svg",
       "color": "#ffff00ff"
     },
     {
       "title": "Humor Effect",
       "description": "The humor effect is a psychological phenomenon that suggests humorous items or experiences are more easily remembered and enjoyed. Integrating humor into content, interactions, and processes can make them more engaging and memorable for users. In learning contexts, humor can facilitate knowledge acquisition and retention by making the experience more enjoyable and less stressful. Keywords of Related Topics: Affect Heuristic, Peak-End Rule, Surprise, Delighters.",
-      "src": "humor.svg",
+      "src": "madlib-assets/humor.svg",
       "color": "#ff9900ff"
     },
     {
       "title": "Autonomy",
       "description": "Autonomy refers to the desire for individuals to have control and influence over their choices and decisions. Providing a sense of autonomy can increase feelings of certainty and reduce stress, leading to more positive experiences and higher user engagement. By introducing choices, even trivial ones, and allowing users to feel ownership or influence over aspects of a system, you can foster a sense of autonomy. Keywords of Related Topics: Self-Expression, Need for Certainty, Authority, Limited Choice, Ownership Bias.",
-      "src": "autonomy_behav.svg",
+      "src": "madlib-assets/autonomy_behav.svg",
       "color": "#7c7cffff"
     },
     {
       "title": "Serial Position Effect",
       "description": "The Serial Position Effect is a psychological phenomenon where people tend to remember the first and last items in a list more effectively than those in the middle. This effect can be used strategically when presenting information, such as product features, company bios, or other lists, by placing the most important items at the beginning and end of the list to enhance recall. Keywords of Related Topics: Peak-End Rule, Chunking.",
-      "src": "serial.svg",
+      "src": "madlib-assets/serial.svg",
       "color": "#9900ffff"
     },
     {
       "title": "Scarcity",
       "description": "Scarcity is a persuasive technique that plays on the perception of limited availability to increase the perceived value of a product, service, or resource. By creating a sense of scarcity, people are more likely to take action or be more judicious in their choices. This principle can be applied not only to purchasing behaviors but also to situations where a limited resource, such as tokens or votes, is introduced to encourage more thoughtful decision-making. Keywords of Related Topics: Limited Duration, Limited Choice, Variable Rewards.",
-      "src": "scarcity.svg",
+      "src": "madlib-assets/scarcity.svg",
       "color": "#ff0000ff"
     },
     {
       "title": "Sensory Appeal",
       "description": "Sensory appeal refers to the engagement and memorability of experiences that appeal to multiple senses. In design, this can involve incorporating elements that not only stimulate sight and touch but also suggest other sensory experiences, such as sound, smell, or taste. By appealing to multiple senses, designers can create more engaging and memorable experiences for users. Keywords of Related Topics: Visual Imagery, Aesthetic-Usability Effect, Affect Heuristic, Humor Effect, Surprise, Delighters.",
-      "src": "sensory.svg",
+      "src": "madlib-assets/sensory.svg",
       "color": "#00ffffff"
     },
     {
       "title": "Social Proof",
       "description": "Social proof is the psychological phenomenon where people look to the behavior of others, especially those similar to themselves, in unfamiliar or ambiguous situations to help them make decisions or feel more comfortable. By showcasing social activity, positive reviews, testimonials, or the actions of other users, designers can influence users' decisions and encourage desired behaviors. Keywords of Related Topics: Positive Mimicry, Status Quo Bias, Competition, Shaping, Authority, Autonomy, Reputation, Status.",
-      "src": "social.svg",
+      "src": "madlib-assets/social.svg",
       "color": "#00ff00ff"
     },
     {
       "title": "Ownership Bias Model",
       "description": "Ownership Bias, also known as the endowment effect, is the tendency for people to overvalue things they own or possess. To harness this mental model for inventiveness and improve the chances of developing patentable ideas, design your product or service in a way that encourages users to feel a sense of ownership. This could involve personalization, customization, or user-generated content. By creating a deeper emotional connection between customers and your offering, you can foster innovation and enhance the potential for patentability. Keywords of Related Topics: Personalization, Customization, User-Generated Content, Emotional Connection, Endowment Effect.",
-      "src": "ownership.svg",
+      "src": "madlib-assets/ownership.svg",
       "color": "#ff9900ff"
     },
     {
       "title": "Peak-End Rule",
       "description": "The Peak-End Rule suggests that we evaluate experiences based on their peaks and endings. To increase inventiveness and the likelihood of patentable ideas, focus on identifying and enhancing these key moments in the customer experience you've designed. Peaks can include the core value you provide or unexpected delighters in the user journey, while endpoints can range from obvious to subtle interactions. Incorporate elements such as Iteration, Adaptation, Continuous Improvement, User Experience, Responsiveness.",
-      "src": "peak.svg",
+      "src": "madlib-assets/peak.svg",
       "color": "#00ff00ff"
     },
     {
       "title": "Feedback Loops",
       "description": "Feedback Loops involve the process of using information from past actions to adjust and improve future actions. In the context of inventiveness and patentability, implementing effective feedback loops in the customer experience can lead to the continuous improvement of your product or service. Pay attention to customer reactions and behaviors, adjusting your design based on their responses. By constantly refining your concept through iterative cycles of feedback and modification, you can foster innovation and enhance the likelihood of creating patentable solutions.",
-      "src": "feedback.svg",
+      "src": "madlib-assets/feedback.svg",
       "color": "#ffff00ff"
     },
     {
       "title": "Sequencing",
       "description": "Sequencing is the process of breaking down complex activities into smaller, manageable tasks, which makes it more likely for individuals to take action. This concept can be applied to invention and patent potential by simplifying the development process into clear, achievable steps. By making the process more accessible and reducing the cognitive load, you can foster innovation and increase the likelihood of generating patentable ideas. Utilizing sequencing in your product or service design can also improve user experience, encouraging users to complete tasks and engage with your offering. Keywords of Related Topics:Task Simplification, Cognitive Load, User Experience, Step-by-Step Process, Achievable Goals.",
-      "src": "sequence.svg",
+      "src": "madlib-assets/sequence.svg",
       "color": "#7c7cffff"
     },
     {
       "title": "Loss Aversion",
       "description": "Loss Aversion refers to the psychological tendency of individuals to prefer avoiding losses over acquiring gains. To capitalize on this concept for inventiveness and increase patent potential, design your product or service in a way that emphasizes the potential losses users may experience by not engaging with your offering. Allow users to interact with your service, create personal content, and offer perceived value that they would lose by not signing up or closing their account. By framing your value proposition to highlight potential losses or missed opportunities, you can foster innovation and enhance the likelihood of developing patentable ideas.Keywords of Related Topics: Framing, Ownership Bias, Value Proposition, User Engagement, Perceived Value.",
-      "src": "loss.svg",
+      "src": "madlib-assets/loss.svg",
       "color": "#9900ffff"
     },
     {
       "title": "Authority",
       "description": "Authority involves the tendency for individuals to follow the lead and advice of a legitimate authority figure. To harness the power of authority for inventiveness and increase patent potential, design your product or service in a way that guides users confidently through the experience. Ensure your application communicates confidence, assurance, and expertise, and consider incorporating the presence of a reputable authority figure or well-known brand to reassure users in uncertain or new spaces. By leveraging authority, you can foster innovation and enhance the likelihood of developing patentable ideas. Keywords of Related Topics: Framing, Ownership Bias, Value Proposition, User Engagement, Perceived Value",
-      "src": "authority.svg",
+      "src": "madlib-assets/authority.svg",
       "color": "#ff00ffff"
     }
   ],
@@ -584,109 +586,109 @@ top: 0;
     {
       "title": "AI",
       "description": "Artificial Intelligence (AI) technology revolves around the development of machines or software capable of learning, problem-solving, and decision-making. To capitalize on AI for inventiveness and increase the potential for patentable ideas, integrate AI-driven features into your product or service to optimize user experience, automate tasks, and provide personalized solutions. By leveraging AI's ability to learn from data and adapt to user needs, you can foster innovation and develop groundbreaking, patentable solutions in various industries. Keywords of Related Topics: Machine Learning, Automation, Personalization, Data-Driven Decision Making, Adaptive Systems.",
-      "src": "ai.svg",
+      "src": "madlib-assets/ai.svg",
       "color": "#00ff00ff"
     },
     {
       "title": "Wireless",
       "description": "Wireless Technology encompasses the transmission of data through wireless signals, such as radio waves, microwaves, and infrared waves. This technology has numerous applications, including communication, tracking, and automation. To leverage wireless technology for inventiveness and increase the likelihood of patentable ideas, integrate wireless features into your product or service. By providing seamless connectivity, real-time data exchange, and increased mobility, you can foster innovation and develop pioneering, patentable solutions in various fields. Keywords of Related Topics: Wi-Fi, Bluetooth, Cellular Networks, Satellite Communications, Real-Time Connectivity.",
-      "src": "wireless.svg",
+      "src": "madlib-assets/wireless.svg",
       "color": "#ff9900ff"
     },
     {
       "title": "Marketing Automation",
       "description": "Marketing Automation is a technology that involves using data and automation technology to personalize marketing campaigns and improve the effectiveness of outreach efforts. This can include automating email campaigns, social media postings, and targeted advertising, as well as analyzing customer data to personalize messaging and offerings. Marketing Automation technology can improve customer engagement, lead generation, and conversion rates, and it's used in many industries, including e-commerce, healthcare, and financial services. Keywords of Related Topics: Data Analytics, Automation, Personalization, Email Campaigns, Social Media, Targeted Advertising, Customer Engagement, Lead Generation, Conversion Rates, E-commerce, Healthcare, Financial Services.",
-      "src": "marketing.svg",
+      "src": "madlib-assets/marketing.svg",
       "color": "#ff00ffff"
     },
     {
       "title": "Smart Identification",
       "description": "Smart Identification & Data Gathering (SIDG) solutions refer to a range of user-friendly technologies that help identify and collect information about objects and individuals. These technologies, such as barcodes, RFID tags, and biometric recognition, are used in various applications like keeping track of inventory, managing supply chains, and enhancing security measures. By automating data collection, SIDG solutions boost efficiency, minimize errors, and allow for real-time tracking of information. Keywords of Related Topics: Barcodes, RFID Tags, Biometrics, Inventory Tracking, Supply Chain Management, Security Enhancement, Automation, Data Collection, Efficiency Improvement, Real-Time Monitoring.",
-      "src": "smart.svg",
+      "src": "madlib-assets/smart.svg",
       "color": "#7c7cffff"
     },
     {
       "title": "Responsive Design Tech",
       "description": "Responsiveness/Adaptive Design is a technology that focuses on creating designs capable of adapting to various contexts and environments. This includes digital products like websites and mobile apps, as well as physical products such as clothing and furniture. To harness responsiveness and adaptability for inventiveness and increase the chances of patentable ideas, incorporate these principles into your product or service. By improving user experience and accessibility for a diverse audience, you can foster innovation and develop cutting-edge, patentable solutions across numerous industries. Keywords of Related Topics: User Experience, Accessibility, Context-Aware Design, Cross-Platform Compatibility, Dynamic Layouts.",
-      "src": "responsive.svg",
+      "src": "madlib-assets/responsive.svg",
       "color": "#ffff00ff"
     },
     {
       "title": "Augmented Reality",
       "description": "Augmented Reality (AR) is a technology that overlays digital information and objects onto the real world. AR can be experienced through devices like smartphones, tablets, and smart glasses, and can be used in a variety of applications, including gaming, entertainment, and education. AR technology can enhance user experiences by adding layers of information and interactivity to the physical world, and it has potential applications in fields like architecture, engineering, and medicine. Keywords of Related Topics: Virtual Reality, Mixed Reality, Gaming, Entertainment, Education, Smartphones, Tablets, Smart Glasses, Architecture, Engineering, Medicine.",
-      "src": "augmented_reality.svg",
+      "src": "madlib-assets/augmented_reality.svg",
       "color": "#ffa492ff"
     },
     {
       "title": "Virtual Reality",
       "description": "Virtual Reality (VR) is a technology that uses computer-generated 3D environments to create immersive experiences for users. VR can be experienced through devices like head-mounted displays, and can be used in a variety of applications, including gaming, education, and training. VR technology can simulate real-world scenarios and environments, allowing users to interact with digital objects and spaces in a more intuitive and natural way. It has potential applications in fields like medicine, engineering, and entertainment. Keywords of Related Topics: Augmented Reality, Mixed Reality, Gaming, Education, Training, Head-Mounted Displays, Simulations, Medicine, Engineering, Entertainment.",
-      "src": "virtualreality.svg",
+      "src": "madlib-assets/virtualreality.svg",
       "color": "#ffff00ff"
     },
     {
       "title": "AI: LLM's",
       "description": "Large Language Models (LLMs) are a type of AI that use deep learning techniques to understand and generate human language. They are trained on massive amounts of text data and can generate responses to questions, write articles, and even generate creative works like music and art. Keywords of Related Topics: Artificial Intelligence, Deep Learning, Natural Language Processing, Language Translation, Robotics, Computer Vision, Chatbots, Content Generation, Healthcare, Finance, Entertainment.",
-      "src": "ai_llms.svg",
+      "src": "madlib-assets/ai_llms.svg",
       "color": "#ff0000ff"
     },
     {
       "title": "Web Scraping",
       "description": "Web scraping is a technology that involves extracting data from websites automatically. It allows users to collect large amounts of data from the internet quickly and efficiently, by using automated bots or scripts. Web scraping has many potential applications, including market research, price monitoring, and content aggregation. Keywords of Related Topics: Data Extraction, Automated Bots, Scripts, Market Research, Price Monitoring, Content Aggregation, Big Data, Web Crawling.",
-      "src": "web_scraping.svg",
+      "src": "madlib-assets/web_scraping.svg",
       "color": "#00ffffff"
     },
     {
       "title": "Personalization",
       "description": "Personalization is a technology that uses data and algorithms to tailor experiences to individual users. This can include personalized product recommendations, customized news feeds, and targeted advertising. Personalization technology can improve customer engagement and loyalty, and it's used in many industries, including retail, media, and healthcare. Keywords of Related Topics: Data Analytics, Algorithms, Machine Learning, User Experience (UX), Customer Engagement, Targeted Advertising, Retail, Media, Healthcare.",
-      "src": "personalization.svg",
+      "src": "madlib-assets/personalization.svg",
       "color": "#00ff00ff"
     },
     {
       "title": "Cookie Storage",
       "description": "Cookie storage is a technology that allows websites to store small pieces of data on a user's device. These pieces of data are called cookies, and they can be used to remember user preferences and login information. Cookies can also be used to track user behavior, which can be used for advertising and analytics purposes. While cookies can improve the user experience and provide valuable insights to website owners, they also raise privacy concerns and have led to regulations like GDPR and CCPA. Keywords of Related Topics: Web Tracking, User Data, User Behavior, Advertising, Analytics, Privacy, GDPR, CCPA.",
-      "src": "cookiestorage.svg",
+      "src": "madlib-assets/cookiestorage.svg",
       "color": "#ffff00ff"
     },
     {
       "title": "Data Visualization",
       "description": "Data Visualization is a technology that involves creating visual representations of data to help users understand and analyze it. This can include charts, graphs, and maps, which can make large amounts of complex data more accessible and easier to interpret. Data visualization is used in many industries, including finance, healthcare, and marketing, and it can help organizations make data-driven decisions. Keywords of Related Topics: Data Analysis, Charts, Graphs, Maps, Business Intelligence, Data-driven Decision Making, Visualization Tools, Finance, Healthcare, Marketing.",
-      "src": "data_visualization.svg",
+      "src": "madlib-assets/data_visualization.svg",
       "color": "#ff9900ff"
     },
     {
       "title": "Robotics",
       "description": "Robotics is the field of technology that creates machines that can do tasks on their own, like humans. These machines are called robots and they can be used in many ways, like assembling cars or performing surgery. They can be controlled by humans or programmed to work autonomously. Robotics technology is advancing quickly, and robots are becoming more versatile and adaptable to different situations. Keywords of Related Topics: Machines, Autonomy, Automation, Control, Versatility, Adaptability, Manufacturing, Healthcare.",
-      "src": "robotics.svg",
+      "src": "madlib-assets/robotics.svg",
       "color": "#7c7cffff"
     },
     {
       "title": "Internet of Things (IoT)",
       "description": "The Internet of Things (IoT) is a network of physical objects that can connect to the internet and share data with each other. These objects can be everyday things like home appliances, vehicles, or wearable devices, and they can communicate with each other to perform various tasks. IoT technology can make life more convenient by allowing devices to automatically adjust to our preferences and needs, like adjusting the temperature of our homes or tracking our fitness goals.Keywords of Related Topics: Physical objects, Network, Connectivity, Convenience, Home appliances, Wearables, Smart technology.",
-      "src": "internet_of_things.svg",
+      "src": "madlib-assets/internet_of_things.svg",
       "color": "#ff00ffff"
     },
     {
       "title": "Automation",
       "description": "Automation is a way of using technology to make work easier and faster. It involves machines and computers that can do tasks on their own, without needing a human to do them. Automation can help increase productivity, efficiency, and accuracy, while reducing costs and minimizing errors. It can be found in industries like manufacturing and transportation, and it can make things like assembly lines and shipping processes run more smoothly. Keywords of Related Topics: Machines, Computers, Efficiency, Productivity, Assembly lines, Transportation, Manufacturing.",
-      "src": "automation.svg",
+      "src": "madlib-assets/automation.svg",
       "color": "#ffa492ff"
     },
     {
       "title": "Blockchain",
       "description": "Blockchain is a secure and transparent digital ledger that can't be easily tampered with. It's used to keep track of things like money, products, and contracts in a way that's decentralized, meaning that no one person or organization controls it. It has many potential applications, including digital currencies like Bitcoin, and improving supply chain management. Keywords of Related Topics: Digital money, Bitcoin, Secure record-keeping, Decentralization, Supply chain management, Smart contracts.",
-      "src": "blockchain.svg",
+      "src": "madlib-assets/blockchain.svg",
       "color": "#ff0000ff"
     },
     {
       "title": "Data Analysis",
       "description": "Data Analysis is a field of technology that involves collecting and examining large amounts of data to uncover patterns, insights, and trends. This information can be used to make better decisions, improve operations, and gain a competitive advantage. Data analysis tools and techniques include machine learning, statistical analysis, and data visualization. Data analysis has many potential applications, including improving healthcare outcomes, optimizing supply chains, and detecting fraud. Keywords of Related Topics: Data collection, Data examination, Patterns, Insights, Trends, Machine learning, Statistical analysis, Data visualization, Healthcare, Supply chain management, Fraud detection.",
-      "src": "data_analysis.svg",
+      "src": "madlib-assets/data_analysis.svg",
       "color": "#00ffffff"
     },
     {
       "title": "Customer Relationship Management",
       "description": "Customer Relationship Management (CRM) is a technology that involves managing and analyzing customer data to improve interactions and relationships. This can include collecting data on customer preferences, purchase history, and demographics, and using that information to personalize communication and offerings. CRM technology can improve customer satisfaction, retention, and loyalty, and it's used in many industries, including retail, healthcare, and finance. Keywords of Related Topics: Customer Data, Personalization, Purchase History, Demographics, Marketing, Sales, Customer Service, Analytics, Retail, Healthcare, Finance.",
-      "src": "crm.svg",
+      "src": "madlib-assets/crm.svg",
       "color": "#9900ffff"
     }
   ]
@@ -1002,6 +1004,15 @@ document.getElementById('spin-button').addEventListener('click', () => {
       results.style.display = "none";
       output.style.display = "none";
       hideAllFrames(); // Hide all frames when spinning again
+
+      // Add animation classes
+      document.querySelector('.logo').classList.add('small');
+      document.getElementById('windows-container').classList.add('moved-up');
+      
+      // Hide the steps container and prompt text
+      document.querySelector('.container').style.display = "none";
+      document.getElementById('prompt-text').style.display = "none";
+
       let frameIndex, mentalIndex, techIndex;
       animateWindow(window1, framingPerspectives, function(index) {
         frameIndex = index;
@@ -1044,6 +1055,8 @@ document.getElementById('spin-button').addEventListener('click', () => {
     example.addEventListener("click", function(e) {
       e.preventDefault();
       showAllFrames();
+      // Hide the link after clicking
+      example.style.display = "none";
     });
 
     spinButton.addEventListener("click", spin);
