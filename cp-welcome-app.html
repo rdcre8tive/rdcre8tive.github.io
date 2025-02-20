@@ -39,12 +39,55 @@
             transition: 0.3s;
             margin: 0;
             padding: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .preview-box::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 90%;
+            height: 90%;
+            background-image: url('assets/rings.svg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.7;
+            transform: translate(-50%, -50%);
+            animation: rotateRings 35s linear infinite;
+            z-index: 1;
+            transition: all 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
         .preview-box h1 {
-            width: 50%;
+            width: 80%;
             margin: 0;
             font-size: 48px;
             text-align: center;
+            line-height: 1.3;
+            opacity: 1;
+            transform: scale(1);
+            transition: opacity 1.5s cubic-bezier(0.165, 0.84, 0.44, 1),
+                        transform 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+            z-index: 2;
+        }
+        @keyframes rotateRings {
+            from {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            to {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+        .preview-box.transitioning h1 {
+            opacity: 0;
+            transform: scale(0.6);
+        }
+        .preview-box.transitioning::before {
+            opacity: 0.5;
+            width: 76.5%;  /* 90% * 0.85 = 76.5% - this creates the scale effect */
+            height: 76.5%;
         }
         .deck {
             width: 80%;
@@ -66,6 +109,8 @@
             width: 250px;
             position: relative;
             transition: 0.3s;
+            min-height: 60px;
+            line-height: 1.3;
         }
         .card.live {
             border: 3px solid green;
@@ -113,13 +158,16 @@
         .column h3 {
             color: black;
         }
+        #messagePreview {
+            line-height: 1.3;
+        }
     </style>
 </head>
 <body>
 
     <!-- Live Display Preview -->
     <div class="preview-box" id="livePreview">
-        <h1>Live Message Preview</h1>
+        <h1>Welcome</h1>
     </div>
 
     <div class="content-wrapper">
@@ -175,27 +223,55 @@
             document.querySelector('.content-wrapper').style.display = 'none';
         }
 
+        function toTitleCase(str) {
+            return str.replace(/\w\S*/g, function(txt) {
+                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+            });
+        }
+
+        function formatMessage(name, message) {
+            if (!message) return '';
+            message = toTitleCase(message);
+            
+            if (name && name !== "[None]") {
+                name = toTitleCase(name);
+                return `${name},\n${message}`;
+            }
+            return message;
+        }
+
         function updatePreview() {
             const selectedName = document.querySelector('input[name="selectedName"]:checked + span');
             const selectedMessage = document.querySelector('input[name="selectedMessage"]:checked + span');
             
             if (selectedMessage) {
-                const nameText = selectedName ? (selectedName.textContent === "[None]" ? "" : selectedName.textContent + ": ") : "";
-                const messageText = `${nameText}${selectedMessage.textContent}`;
-                messagePreview.textContent = messageText;
-                livePreview.querySelector('h1').textContent = messageText;
+                const nameText = selectedName ? selectedName.textContent : "";
+                const messageText = selectedMessage.textContent;
+                messagePreview.innerHTML = formatMessage(nameText, messageText).replace('\n', '<br>');
             } else {
                 messagePreview.textContent = '[Select a message]';
-                const defaultMessage = messageList.querySelector('.message-item:first-child span');
-                const previewText = defaultMessage ? defaultMessage.textContent : 'Live Message Preview';
-                livePreview.querySelector('h1').textContent = previewText;
             }
         }
 
-        function pushToDeck() {
-            if (messagePreview.textContent !== '[Select a name and message]') {
-                saveToDeck(messagePreview.textContent);
-            }
+        function updateLivePreview(text) {
+            const h1 = livePreview.querySelector('h1');
+            const rings = livePreview.querySelector('::before');
+            
+            // Calculate current rotation
+            const currentRotation = (Date.now() / 35000) * 360 % 360;
+            livePreview.style.setProperty('--rotation', `${currentRotation}deg`);
+            
+            livePreview.classList.add('transitioning');
+            
+            // Wait for fade out (1.5 seconds to match transition)
+            setTimeout(() => {
+                // Update content
+                h1.innerHTML = text.replace('\n', '<br>');
+                // Trigger reflow
+                h1.offsetHeight;
+                // Fade in
+                livePreview.classList.remove('transitioning');
+            }, 1500);
         }
 
         function saveToDeck(text) {
@@ -204,6 +280,8 @@
             if (!existingCard) {
                 const card = document.createElement('div');
                 card.classList.add('card');
+                // Use white-space: pre-line to preserve line breaks
+                card.style.whiteSpace = 'pre-line';
                 card.textContent = text;
 
                 const deleteBtn = document.createElement('button');
@@ -213,26 +291,45 @@
                     event.stopPropagation();
                     deck.removeChild(card);
                     if (card === activeLiveCard) {
-                        livePreview.querySelector('h1').textContent = "Live Message Preview";
-                        livePreview.classList.remove('live');
-                        activeLiveCard = null;
+                        resetToWelcome();
                     }
                 });
 
-                // Clicking the card makes it live
                 card.addEventListener('click', () => {
                     if (activeLiveCard) {
                         activeLiveCard.classList.remove('live');
                     }
                     card.classList.add('live');
                     activeLiveCard = card;
-                    livePreview.querySelector('h1').textContent = text;
+                    // Use the new transition function
+                    updateLivePreview(text);
                     livePreview.classList.add('live');
                 });
 
                 card.appendChild(deleteBtn);
                 deck.appendChild(card);
             }
+        }
+
+        function pushToDeck() {
+            if (messagePreview.textContent !== '[Select a name and message]' && messagePreview.textContent !== '[Select a message]') {
+                const selectedName = document.querySelector('input[name="selectedName"]:checked + span');
+                const selectedMessage = document.querySelector('input[name="selectedMessage"]:checked + span');
+                const formattedText = formatMessage(
+                    selectedName ? selectedName.textContent : null,
+                    selectedMessage ? selectedMessage.textContent : null
+                );
+                saveToDeck(formattedText);
+            }
+        }
+
+        function resetToWelcome() {
+            if (activeLiveCard) {
+                activeLiveCard.classList.remove('live');
+            }
+            activeLiveCard = null;
+            updateLivePreview("Welcome");
+            livePreview.classList.remove('live');
         }
 
         function addToList(parent, text, type) {
@@ -262,12 +359,22 @@
 
         // Preload Generic Messages
         function preloadMessages() {
-            // Add default message first and select it
+            // Add messages without triggering preview updates
             const defaultDiv = addToList(messageList, "Welcome", "message");
-            defaultDiv.querySelector('input[type="radio"]').checked = true;
+            const defaultRadio = defaultDiv.querySelector('input[type="radio"]');
+            
+            // Remove the change event listener temporarily
+            defaultRadio.removeEventListener('change', updatePreview);
+            // Check the radio button
+            defaultRadio.checked = true;
+            // Add the event listener back
+            defaultRadio.addEventListener('change', updatePreview);
             
             addToList(messageList, "Please check in at the front desk", "message");
             addToList(messageList, "Thank you for visiting", "message");
+            
+            // Set the initial message preview without affecting live preview
+            messagePreview.textContent = "Welcome";
         }
 
         addNameButton.addEventListener('click', () => {
@@ -290,8 +397,8 @@
         preloadNames();
         preloadMessages();
         
-        // Initialize preview with default message
-        updatePreview();
+        // Initialize preview with "Welcome" and reset any active cards
+        resetToWelcome();
 
     </script>
 
