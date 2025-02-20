@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Digital Sign Messaging</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0;
+            margin: 0;
+            background: black;
+        }
+        .container {
+            display: flex;
+            width: 80%;
+            max-width: 1000px;
+            gap: 20px;
+        }
+        .column {
+            flex: 1;
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+        }
+        .preview-box {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: black;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            text-align: center;
+            transition: 0.3s;
+            margin: 0;
+            padding: 0;
+        }
+        .deck {
+            width: 80%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+            margin-bottom: 40px;
+        }
+        .card {
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 250px;
+            position: relative;
+            transition: 0.3s;
+        }
+        .card.live {
+            border: 3px solid green;
+        }
+        .card .close-btn {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: red;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            background: blue;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: darkblue;
+        }
+        @media screen and (max-width: 768px) {
+            .preview-box {
+                font-size: 18px;
+            }
+        }
+
+        .content-wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background: black;
+            margin-top: 40px;
+        }
+        h3 {
+            color: white;
+        }
+        .column h3 {
+            color: black;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Live Display Preview -->
+    <div class="preview-box" id="livePreview">
+        Live Message Preview
+    </div>
+
+    <div class="content-wrapper">
+        <!-- Deck Area for Cards -->
+        <h3>Deck (Queued Messages)</h3>
+        <div id="deck" class="deck"></div>
+
+        <div class="container">
+            <!-- Editable Names Column -->
+            <div class="column">
+                <h3>Select or Edit Names</h3>
+                <input type="text" id="newName" placeholder="Enter first name">
+                <button id="addName">Add Name</button>
+                <div id="nameList"></div>
+            </div>
+
+            <!-- Editable Messages Column -->
+            <div class="column">
+                <h3>Select or Edit Messages</h3>
+                <input type="text" id="newMessage" placeholder="Enter new message">
+                <button id="addMessage">Add Message</button>
+                <div id="messageList"></div>
+            </div>
+
+            <!-- Preview Column -->
+            <div class="column">
+                <h3>Message Preview</h3>
+                <p id="messagePreview">[Select a name and message]</p>
+                <button id="pushToDeckButton">Push to Deck</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const nameList = document.getElementById('nameList');
+        const messageList = document.getElementById('messageList');
+        const deck = document.getElementById('deck');
+        const newNameInput = document.getElementById('newName');
+        const newMessageInput = document.getElementById('newMessage');
+        const addNameButton = document.getElementById('addName');
+        const addMessageButton = document.getElementById('addMessage');
+        const messagePreview = document.getElementById('messagePreview');
+        const livePreview = document.getElementById('livePreview');
+        const pushToDeckButton = document.getElementById('pushToDeckButton');
+
+        let activeLiveCard = null;
+
+        function updatePreview() {
+            const selectedName = document.querySelector('input[name="selectedName"]:checked + span');
+            const selectedMessage = document.querySelector('input[name="selectedMessage"]:checked + span');
+            
+            if (selectedMessage) {
+                const nameText = selectedName ? (selectedName.textContent === "[None]" ? "" : selectedName.textContent + ": ") : "";
+                messagePreview.textContent = `${nameText}${selectedMessage.textContent}`;
+                livePreview.textContent = messagePreview.textContent;
+            } else {
+                messagePreview.textContent = '[Select a message]';
+                const defaultMessage = messageList.querySelector('.message-item:first-child span');
+                livePreview.textContent = defaultMessage ? defaultMessage.textContent : 'Live Message Preview';
+            }
+        }
+
+        function pushToDeck() {
+            if (messagePreview.textContent !== '[Select a name and message]') {
+                saveToDeck(messagePreview.textContent);
+            }
+        }
+
+        function saveToDeck(text) {
+            // Check if already exists
+            let existingCard = Array.from(deck.children).find(card => card.textContent.includes(text));
+            if (!existingCard) {
+                const card = document.createElement('div');
+                card.classList.add('card');
+                card.textContent = text;
+
+                const deleteBtn = document.createElement('button');
+                deleteBtn.textContent = '✖';
+                deleteBtn.classList.add('close-btn');
+                deleteBtn.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    deck.removeChild(card);
+                    if (card === activeLiveCard) {
+                        livePreview.textContent = "Live Message Preview";
+                        livePreview.classList.remove('live');
+                        activeLiveCard = null;
+                    }
+                });
+
+                // Clicking the card makes it live
+                card.addEventListener('click', () => {
+                    if (activeLiveCard) {
+                        activeLiveCard.classList.remove('live');
+                    }
+                    card.classList.add('live');
+                    activeLiveCard = card;
+                    livePreview.textContent = text;
+                    livePreview.classList.add('live');
+                });
+
+                card.appendChild(deleteBtn);
+                deck.appendChild(card);
+            }
+        }
+
+        function addToList(parent, text, type) {
+            const div = document.createElement('div');
+            div.classList.add(type === 'name' ? 'name-item' : 'message-item');
+
+            const radio = document.createElement('input');
+            radio.type = 'radio';
+            radio.name = type === 'name' ? 'selectedName' : 'selectedMessage';
+            radio.addEventListener('change', updatePreview);
+
+            const span = document.createElement('span');
+            span.textContent = text;
+
+            div.appendChild(radio);
+            div.appendChild(span);
+            parent.appendChild(div);
+            return div;
+        }
+
+        // Preload Names for Testing
+        function preloadNames() {
+            addToList(nameList, "[None]", "name");
+            addToList(nameList, "Bryan", "name");
+            addToList(nameList, "Drew", "name");
+        }
+
+        // Preload Generic Messages
+        function preloadMessages() {
+            // Add default message first and select it
+            const defaultDiv = addToList(messageList, "Welcome", "message");
+            defaultDiv.querySelector('input[type="radio"]').checked = true;
+            
+            addToList(messageList, "Please check in at the front desk", "message");
+            addToList(messageList, "Thank you for visiting", "message");
+        }
+
+        addNameButton.addEventListener('click', () => {
+            if (newNameInput.value.trim()) {
+                addToList(nameList, newNameInput.value.trim(), 'name');
+                newNameInput.value = '';
+            }
+        });
+
+        addMessageButton.addEventListener('click', () => {
+            if (newMessageInput.value.trim()) {
+                addToList(messageList, newMessageInput.value.trim(), 'message');
+                newMessageInput.value = '';
+            }
+        });
+
+        pushToDeckButton.addEventListener('click', pushToDeck);
+
+        // Load Test Data
+        preloadNames();
+        preloadMessages();
+        
+        // Initialize preview with default message
+        updatePreview();
+
+    </script>
+
+</body>
+</html>
