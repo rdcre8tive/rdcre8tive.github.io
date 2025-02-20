@@ -161,6 +161,17 @@
       margin-right: auto;
     }
 
+    #output span {
+      font-weight: 500 !important;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    #output span:hover {
+      opacity: 0.8;
+    }
+
     #spin-button {
       display: block;
       margin: 30px auto;
@@ -775,6 +786,20 @@ document.getElementById('spin-button').addEventListener('click', () => {
     const ANIMATION_DURATION = 4000;
     const ANIMATION_INTERVAL = 100;
 
+    // Add hexToRgb helper function
+    function hexToRgb(hex) {
+      // Remove the hash if present
+      hex = hex.replace(/^#/, '');
+
+      // Parse the hex values
+      const bigint = parseInt(hex, 16);
+      const r = (bigint >> 16) & 255;
+      const g = (bigint >> 8) & 255;
+      const b = bigint & 255;
+
+      return { r, g, b };
+    }
+
     function animateWindow(window, images, callback) {
       let iterationCount = 0;
       const intervalId = setInterval(() => {
@@ -1060,16 +1085,25 @@ document.getElementById('spin-button').addEventListener('click', () => {
         frameIndex = index;
         variable2.innerHTML = framingPerspectives[index].title;
         variable2.style.color = framingPerspectives[index].color;
+        variable2.style.backgroundColor = 'rgba(' + hexToRgb(framingPerspectives[index].color).r + ',' 
+                                                 + hexToRgb(framingPerspectives[index].color).g + ',' 
+                                                 + hexToRgb(framingPerspectives[index].color).b + ', 0.1)';
       });
       animateWindow(window2, mentalModelUX, function(index) {
         mentalIndex = index;
         variable3.innerHTML = mentalModelUX[index].title;
         variable3.style.color = mentalModelUX[index].color;
+        variable3.style.backgroundColor = 'rgba(' + hexToRgb(mentalModelUX[index].color).r + ',' 
+                                                 + hexToRgb(mentalModelUX[index].color).g + ',' 
+                                                 + hexToRgb(mentalModelUX[index].color).b + ', 0.1)';
       });
       animateWindow(window3, technologyTypes, function(index) {
         techIndex = index;
         variable4.innerHTML = technologyTypes[index].title;
         variable4.style.color = technologyTypes[index].color;
+        variable4.style.backgroundColor = 'rgba(' + hexToRgb(technologyTypes[index].color).r + ',' 
+                                                   + hexToRgb(technologyTypes[index].color).g + ',' 
+                                                   + hexToRgb(technologyTypes[index].color).b + ', 0.1)';
         output.style.display = "block";
         showResults(results, [{
             title: framingPerspectives[frameIndex].title,
