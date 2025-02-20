@@ -33,7 +33,6 @@
     .column {
       flex: 1;
       min-width: 250px;
-      margin: 0 10px;
     }
 
     .divider {
@@ -43,14 +42,28 @@
       display: block;
     }
 
-    @media (max-width: 1200px) {
+    @media (max-width: 1200px) and (min-width: 1001px) {
       .container {
         justify-content: space-around;
       }
       
       .column {
-        flex: 0 1 calc(50% - 40px);
-        margin: 10px;
+        flex: 0 1 40%;
+      }
+
+      .divider {
+        display: none;
+      }
+    }
+
+    @media (max-width: 1000px) and (min-width: 601px) {
+      .container {
+        justify-content: space-between;
+      }
+      
+      .column {
+        flex: 0 1 22%;
+        min-width: 0;
       }
 
       .divider {
@@ -66,7 +79,8 @@
       
       .column {
         flex: 0 1 100%;
-        margin: 10px 0;
+        max-width: 400px;
+        min-width: 250px;
       }
     }
 
